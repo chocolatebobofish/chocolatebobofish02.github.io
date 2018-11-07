@@ -3,7 +3,7 @@
     <head>
         <title>LINE TODAY</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=0; target-densitydpi=medium-dpi; viewport-fit=cover;">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, target-densitydpi=medium-dpi, viewport-fit=cover"/>
     <link rel="icon" href="https://today.line-scdn.net/img/icon192.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
@@ -143,8 +143,27 @@
             </div>
         </div>
     </div>
-    <!---->
+    <!---->    
     <script>
+        window.onload = () => {
+        document.addEventListener('touchstart', (event) => {
+            if (event.touches.length > 1) {
+            event.preventDefault();
+            }
+        }, { passive: false });
+        
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        }
+    </script>
+    <script>
+        // Slider
         var slideIndex = 1;
         showDivs(slideIndex);
         
